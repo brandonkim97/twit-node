@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* index file */
+#right-body {
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(27, 40, 54);
+    position: absolute;
+    z-index: -1;
+}
+#left-body {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(39, 162, 233);
+    position: absolute;
+    z-index: -1;
+}
+.title {
+    padding-left: 10%;
+    color: white;
+}
+
+.form {
+    width: 50%;
+    float: right;
+    margin-right: -5%;
+}
+
+.form label{
+    color: white;
+}
+
+#userLogin {
+    float: right;
+    padding-right: 30%;
+}
+
+/* register file */
+.full-background {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(27, 40, 54);
+    position: absolute;
+    z-index: -1;
+}
+
+#user-authentication {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(35, 49, 66);
+    /*border-radius: 200px;*/
+    padding: 30px 50px 100px 50px;
+}
+
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1px;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  
+  .alert-success hr {
+    border-top-color: #b1dfbb;
+  }
+  
+  .alert-success .alert-link {
+    color: #0b2e13;
+  }
+
+  .dashboard-bg {
+      background-color: rgb(27, 40, 54);
+  }
+  

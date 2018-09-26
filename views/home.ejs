@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Twitter Clone</title>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+    <body>
+        <div id="left-body"></div>
+        <div id="right-body"></div>
+        <h1 class="title">Twit-Node</h1>
+        <main>
+            <form class="form" action="/users/login" method="post">
+                <div id="userLogin">
+                    <label for="name">Name</label>
+                    <input class="u-full-width" type="text" name="username" autocomplete="off">
+                    <label for="password">Password</label>
+                    <input class="u-full-width" type="password" name="password">
+                    <button class="button-primary">Log in</button>
+                    <input id="register-button" class="button-primary" type="button" 
+                    onclick="location.href='/users/register';" value="Sign Up" autocomplete="off">
+                </div>
+            </form>
+        </main>
+        <% if (typeof errors !== "undefined" && errors.length > 0) { %>
+            <% errors.forEach( (err) => { %>
+                <div class="alert alert-danger"><%= err.msg %></div>
+            <% }); %>
+        <% } %>
+
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <title>Register</title>
+        <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">    
+    </head>
+    <body>
+    <div class="full-background"></div>
+    <form class="form" action="/users/register" method="post">
+        <div id="user-authentication">
+            <label for="username">Username</label>
+            <input class="u-full-width" type="text" id="username" name="username" autocomplete="off">
+            <label for="password">Password</label>
+            <input class="u-full-width" type="password" name="password" autocomplete="off">
+            <label for="password">Confirm Password</label>
+            <input class="u-full-width" type="password" name="password2" autocomplete="off">
+            <button class="button-primary">Register</button>
+        </div>
+    </form>
+    <% if (typeof errors !== "undefined" && errors.length > 0) { %>
+        <% errors.forEach( (err) => { %>
+            <div class="alert alert-danger"><%= err.msg %></div>
+        <% }); %>
+    <% } %>
+</body>
+</html>
