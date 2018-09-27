@@ -1,15 +1,11 @@
 var express = require('express');;
 var router = express.Router();
+var path = require('path');
 
 //Dashboard
 router.get('/', checkAuthentication, (req, res) => {
     res.render('index');
 });
-
-//Notifications
-router.get('/notifications', (req, res) => {
-    res.render('notifications');
-})
 
 router.get('/home', (req, res) => {
     res.render('home');
@@ -22,6 +18,13 @@ function checkAuthentication(req, res, next) {
         res.redirect('home');
     }
 }
+
+//SPA routes to send to user
+const handler = (req, res) => {
+    res.render('../views/index');
+};
+const routes = ['/', '/notifications'];
+routes.forEach( route => router.get(route, handler));
 
 module.exports = {
     authenticate: checkAuthentication,
