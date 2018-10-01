@@ -15,7 +15,7 @@
                 <button class="button-primary">Login</button>
             </div>
         </form>
-        <% if(typeof locals.message !== undefined && locals.message != "") { %>
+        <% if(!locals.message) { %>
             <div class="alert alert-success" role="alert">
                 <strong>Thank you for registering!</strong>
             </div>

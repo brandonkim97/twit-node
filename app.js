@@ -3,15 +3,14 @@ var socket = require('socket.io');
 var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var Account = require('./models/user');
 var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var expressValidator = require('express-validator');
-var exphbs = require('express-handlebars');
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
+var tweet = require('./routes/tweet');
 
 var app = express();
 
@@ -21,7 +20,7 @@ app.set('view engine', 'ejs');
 
 //Bodyparser middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //Static folder
@@ -65,11 +64,14 @@ app.use( (req, res, next) => {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
+    res.locals.tweet = req.tweet || null;
     next();
 });
 
-app.use('/', routes.router);
+//Routes
+app.use('/', index.router);
 app.use('/users', users);
+app.use('/tweet', tweet);
 
 //Start server
 app.set('port', (process.env.PORT || 3000));

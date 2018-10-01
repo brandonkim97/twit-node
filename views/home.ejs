@@ -23,7 +23,7 @@
                 </div>
             </form>
         </main>
-        <% if (typeof errors !== "undefined" && errors.length > 0) { %>
+        <% if (typeof errors != "undefined" && errors.length > 0) { %>
             <% errors.forEach( (err) => { %>
                 <div class="alert alert-danger"><%= err.msg %></div>
             <% }); %>

@@ -8,13 +8,13 @@
     <body>
         <div class="full-background"></div>
         <nav class="navbar navbar-expand-lg navbar-dark dashboard-bg">
-                <a class="navbar-brand" href="#">Twit-Node</a>
+                <a class="navbar-brand" href="/">Twit-Node</a>
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="notifications">Notifications</a>
+                      <a class="nav-link" href="./notifications">Notifications</a>
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link" href="#">Messages</a>
@@ -28,5 +28,15 @@
                       <a class="nav-link" href="/users/logout">Logout</a>
                     </li>
               </nav>
+              <form class="form-inline my-2 my-lg-0" action="/tweet/status" method="POST">
+                <input class="form-control mr-sm-2" type="text" name="status" placeholder="What's happening?" autocomplete="off">
+                <button class="btn btn-outline-success my-2 my-sm-0">Tweet</button>
+              </form>
+                <% if (tweet != undefined || tweet != null) { %>
+                  <div class="tweet">
+                    <a><%= tweet.body %></a>
+                  </div>
+                <% } %>
+
     </body>
 </html>

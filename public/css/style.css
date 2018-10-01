@@ -3,6 +3,10 @@ html, body {
     margin: 0;
 }
 
+h1 {
+    z-index: 1;
+}
+
 /* index file */
 #right-body {
     right: 0;
@@ -91,3 +95,16 @@ html, body {
       background-color: rgb(27, 40, 54);
   }
   
+.tweet {
+    position: relative;
+    min-height: 400px;
+    min-width: 500px;
+    z-index: 100;
+    background-color: #15202b;
+    right: 50%;
+}
+
+ a {
+    z-index: 200;
+    color: white;
+}

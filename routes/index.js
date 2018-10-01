@@ -1,16 +1,25 @@
 var express = require('express');;
 var router = express.Router();
-var path = require('path');
 
-//Dashboard
+//Check if user is logged in
 router.get('/', checkAuthentication, (req, res) => {
-    res.render('index');
+    res.render('index', {
+        username: req.user.username,
+        //tweet: tweet
+    });
 });
 
+//Notifications tab
+router.get('/notifications', checkAuthentication, (req, res) => {
+    res.render('notifications');
+});
+
+//Get home page
 router.get('/home', (req, res) => {
     res.render('home');
 });
 
+//Check if user is logged in
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -18,13 +27,6 @@ function checkAuthentication(req, res, next) {
         res.redirect('home');
     }
 }
-
-//SPA routes to send to user
-const handler = (req, res) => {
-    res.render('../views/index');
-};
-const routes = ['/', '/notifications'];
-routes.forEach( route => router.get(route, handler));
 
 module.exports = {
     authenticate: checkAuthentication,
