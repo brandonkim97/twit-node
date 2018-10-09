@@ -1,13 +1,18 @@
 var express = require('express');;
 var router = express.Router();
+var Tweet = require('../models/tweets');
 
 //Check if user is logged in
 router.get('/', checkAuthentication, (req, res) => {
-    res.render('index', {
-        username: req.user.username,
-        //tweet: tweet
+    Tweet.find({}).exec( (err, tweets) => {
+        if (err) throw err;
+        res.render('index', {
+            username: req.user.username,
+            tweets: tweets
+        });
     });
 });
+    
 
 //Notifications tab
 router.get('/notifications', checkAuthentication, (req, res) => {

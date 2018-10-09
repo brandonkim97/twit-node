@@ -2,15 +2,21 @@ var express = require('express');
 var router = express.Router();
 var index = require('./index');
 var Tweet = require('../models/tweets');
+var User = require('../models/user');
 
 router.get('tweet', (req, res) => {
-    res.render('tweet')
+    res.render('tweet');
 });
+
 router.post('/status', index.authenticate, (req, res) => {
+        var date = new Date();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var year = date.getFullYear();
         var username = req.user.username;
         var image = req.body.image;
         var status = req.body.status;
-        var date = new Date().getDate();
+        var date = `${month}/${day}/${year}`;
 
 
         var tweetData = {
@@ -25,11 +31,10 @@ router.post('/status', index.authenticate, (req, res) => {
         var newTweet = new Tweet(tweetData);
         newTweet.save( (err) => {
             if (err) throw err;
-            console.log(username + ' has posted a tweet');
+            //console.log(username + ' has posted a tweet');
         });
-        res.render('index', {
-            tweet: tweetData
-        });
+        res.end();
+        
 });
 
 module.exports = router;

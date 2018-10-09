@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-    </head>
+      <link rel="stylesheet" type="text/css" href="/css/style.css">
+      <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+      </head>
     <title>Twit-Node</title>
     <body>
         <div class="full-background"></div>
@@ -28,15 +28,26 @@
                       <a class="nav-link" href="/users/logout">Logout</a>
                     </li>
               </nav>
-              <form class="form-inline my-2 my-lg-0" action="/tweet/status" method="POST">
-                <input class="form-control mr-sm-2" type="text" name="status" placeholder="What's happening?" autocomplete="off">
-                <button class="btn btn-outline-success my-2 my-sm-0">Tweet</button>
-              </form>
-                <% if (tweet != undefined || tweet != null) { %>
-                  <div class="tweet">
-                    <a><%= tweet.body %></a>
+              <form class="form-inline my-2 my-lg-0" action="/tweet/status"  onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="POST">
+                <div class="tweet-box">
+                  <input class="form-control tweet-input" type="text" name="status" placeholder="What's happening?" autocomplete="off">
+                  <button class="btn btn-outline-success">Tweet</button>
+                </div>
+                </form>
+                <% if (typeof tweets != "undefined") { %>
+                  <% tweets.forEach( (tweet) => { %>
+                    <div class="tweet">
+                      <img class="user-pic" src="/imgs/user.png">
+                      <div class="tweet-context">
+                        <a class="tweet-date"><%= tweet.date %></a>
+                        <a class="username" href="#">@<%= tweet.username %></a>
+                        <a class="tweet-body"><%= tweet.body %></a>
+                      </div>
                   </div>
+                  <% }); %>
                 <% } %>
-
+                <div class="footer">
+                  <a>Twitter is a registered trademark of Twitter Inc. This project is just for educational purpose only.</a>
+                </div>
     </body>
 </html>

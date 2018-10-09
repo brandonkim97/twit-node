@@ -7,7 +7,6 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var expressValidator = require('express-validator');
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 var tweet = require('./routes/tweet');
@@ -75,6 +74,11 @@ app.use('/tweet', tweet);
 
 //Start server
 app.set('port', (process.env.PORT || 3000));
-app.listen(app.get('port'), () => {
+// app.listen(app.get('port'), () => {
+//     console.log('Server started on port ' + app.get('port'));
+// })
+
+var server = app.listen(app.get('port'), () => {
     console.log('Server started on port ' + app.get('port'));
-})
+});
+

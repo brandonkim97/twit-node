@@ -7,7 +7,22 @@ h1 {
     z-index: 1;
 }
 
+
 /* index file */
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+    background-color: #141D26;
+}
+
+.footer a {
+    color: white;
+    right: 50%;
+}
+
 #right-body {
     right: 0;
     width: 50%;
@@ -46,10 +61,10 @@ h1 {
 
 /* register file */
 .full-background {
-    height: 100%;
-    width: 100%;
+    min-height: 100%;
+    min-width: 100%;
     background-color: rgb(27, 40, 54);
-    position: absolute;
+    position: fixed;
     z-index: -1;
 }
 
@@ -95,16 +110,53 @@ h1 {
       background-color: rgb(27, 40, 54);
   }
   
+/* Handle tweets */
 .tweet {
-    position: relative;
-    min-height: 400px;
+    margin: 0 auto;
+    width: 575px;
+    min-height: 125px;
     min-width: 500px;
-    z-index: 100;
     background-color: #15202b;
-    right: 50%;
+    border: 1px solid rgb(129, 128, 128);
+}
+.username{
+    position: relative;
+    z-index: 5;
+    color: white;
+    font-weight: bold; 
+    display: block;
+    box-sizing: border-box;
+    width: 25px;
 }
 
- a {
-    z-index: 200;
+.username:hover {
+    color: #1DA1F2;
+}
+
+.user-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 5px 0px 0px 5px;
+    float: left;
+}
+
+.tweet-box {
+    margin: 20px auto;
+}
+
+
+.tweet-context {
+    margin: 5px 0px 5px 60px;
+}
+
+.tweet-body {
+    position: relative;
     color: white;
+}
+
+.tweet-date {
+    color: grey;
+    float: right;
+    margin-right: 10px;
 }
