@@ -1,4 +1,5 @@
 html, body {
+    position: relative;
     height: 100%;
     margin: 0;
 }
@@ -7,18 +8,24 @@ h1 {
     z-index: 1;
 }
 
+hr {
+    border: none;
+    height: 2px;
+    background-color: rgb(8, 14, 39);
+}
 
 /* index file */
-.footer {
+footer {
+    right: 0;
     left: 0;
     bottom: 0;
     width: 100%;
     height: 100px;
-    margin-top: 30px;
     background-color: #141D26;
+    transform: translateY(100%);
 }
 
-.footer a {
+footer a {
     color: white;
     right: 50%;
 }
@@ -117,16 +124,16 @@ h1 {
     min-height: 125px;
     min-width: 500px;
     background-color: #15202b;
-    border: 1px solid rgb(129, 128, 128);
+    border: 1px solid #38444d;
 }
 .username{
     position: relative;
+    float: left;
     z-index: 5;
     color: white;
     font-weight: bold; 
-    display: block;
     box-sizing: border-box;
-    width: 25px;
+    margin-right: 20px;
 }
 
 .username:hover {
@@ -141,8 +148,62 @@ h1 {
     float: left;
 }
 
-.tweet-box {
+.tweet-form {
+    width: 575px;
+    min-height: 150px;
+    min-width: 500px;
     margin: 20px auto;
+    background-color: #1B3448;
+    border: 1px solid #38444d;
+}
+
+#status {
+    font-size: 14px;
+}
+
+.tweet-button {
+    position: relative;
+    font-weight: bold;
+    padding: 5px 15px;
+    color: white;
+    background-color: #1C88CC;
+    border-color: transparent;
+    border-radius: 100px;
+    left: 84%;
+}
+
+.tweet-button:focus {
+    outline: 0;
+    box-shadow: none!important;
+}
+
+.tweet-danger {
+    opacity: 0.3;
+}
+
+.tweet-danger:hover {
+    cursor: not-allowed;
+}
+
+.tweet-button:hover {
+    background-color: #1da1f2;
+}
+
+.tweet-input{
+    color: white;
+    margin: 0px 0px 0px 60px;
+    min-height: 75px;
+    min-width: 500px;
+    background: #10171e;
+    border: 2px solid #1B4665;
+    border-radius: 8px;
+    resize: none;
+    line-height: 20px;
+    padding: 6px 12px;
+}
+
+.tweet-input:focus {
+    outline: none;
 }
 
 
@@ -156,7 +217,34 @@ h1 {
 }
 
 .tweet-date {
+    position: relative;
     color: grey;
     float: right;
     margin-right: 10px;
+    top: 0%;
+}
+
+
+.tweet-comment {
+    color: white;
+    margin: 0px 0px 0px 40px;
+    min-height: 50px;
+    min-width: 500px;
+    background: #10171e;
+    border: 2px solid #1B4665;
+    border-radius: 8px;
+    resize: none;
+    line-height: 20px;
+    padding: 6px 12px;
+}
+
+.comment-button {
+    position: relative;
+    font-weight: bold;
+    padding: 5px 15px;
+    color: white;
+    background-color: #1C88CC;
+    border-color: transparent;
+    border-radius: 100px;
+    left: 84%;
 }

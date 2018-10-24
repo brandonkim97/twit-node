@@ -3,7 +3,12 @@
     <head>
       <link rel="stylesheet" type="text/css" href="/css/style.css">
       <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-      </head>
+      <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>  
+      <script type="text/javascript" src="/js/homeHandler.js"></script>    
+    </head>
     <title>Twit-Node</title>
     <body>
         <div class="full-background"></div>
@@ -28,26 +33,35 @@
                       <a class="nav-link" href="/users/logout">Logout</a>
                     </li>
               </nav>
-              <form class="form-inline my-2 my-lg-0" action="/tweet/status"  onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="POST">
-                <div class="tweet-box">
-                  <input class="form-control tweet-input" type="text" name="status" placeholder="What's happening?" autocomplete="off">
-                  <button class="btn btn-outline-success">Tweet</button>
-                </div>
+              <form class="form-inline my-2 my-lg-0 tweet-form" action="/tweet/status"  onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="POST">
+                <!-- <div class="tweet-box"> -->
+                  <textarea class="tweet-input" type="text" id="status" name="status" placeholder="What's happening?" autocomplete="off"></textarea>
+                <!-- </div> -->
+                <button class="tweet-button tweet-danger" disabled>Tweet</button>
                 </form>
+
                 <% if (typeof tweets != "undefined") { %>
-                  <% tweets.forEach( (tweet) => { %>
+                  <% tweets.reverse().forEach( (tweet) => { %>
                     <div class="tweet">
                       <img class="user-pic" src="/imgs/user.png">
+                      <a class="tweet-date"> • <%= tweet.date %></a>
+                      <a class="username" href="#">@<%= tweet.username %></a>
+                      <form action='/tweet/<%= tweet.id %>?_method=DELETE' method='POST'>
+                        <button class="btn btn-outline-danger remove-button" type="submit">remove</button>
+                      </form>
                       <div class="tweet-context">
-                        <a class="tweet-date"><%= tweet.date %></a>
-                        <a class="username" href="#">@<%= tweet.username %></a>
                         <a class="tweet-body"><%= tweet.body %></a>
                       </div>
+                      <hr>
+                      <form action="/tweet/<%= tweet.id %>/comments" method="POST">
+                        <textarea class="tweet-comment" id="comments" type="text" placeholder="Enter a comment"></textarea>
+                      </form>
+                      <button class="comment-button tweet-danger" disabled>Reply</button>
                   </div>
                   <% }); %>
                 <% } %>
-                <div class="footer">
+                <footer>
                   <a>Twitter is a registered trademark of Twitter Inc. This project is just for educational purpose only.</a>
-                </div>
+                </footer>
     </body>
 </html>

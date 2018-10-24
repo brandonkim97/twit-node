@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var index = require('./index');
 var Tweet = require('../models/tweets');
-var User = require('../models/user');
 
 router.get('tweet', (req, res) => {
     res.render('tweet');
@@ -34,7 +33,14 @@ router.post('/status', index.authenticate, (req, res) => {
             //console.log(username + ' has posted a tweet');
         });
         res.end();
-        
+});
+
+router.delete('/:id', (req, res) => {
+    var id = req.body.id;
+    Tweet.findOneAndDelete(id, (err, deletedTweet) => {
+        if (err) throw err;
+        res.redirect('/');
+    });
 });
 
 module.exports = router;

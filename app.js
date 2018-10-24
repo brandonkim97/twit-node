@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
+var methodOverride = require('method-override');
 var expressValidator = require('express-validator');
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +22,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+//Method Override middleware
+app.use(methodOverride('_method'));
 
 //Static folder
 app.use(express.static(path.join(__dirname, 'public')));
