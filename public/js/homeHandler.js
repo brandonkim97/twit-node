@@ -23,22 +23,24 @@ var tweetInput = document.getElementById('status');
     });
   });
 
-  // var commentInput = document.getElementById('comments');
-  // $(function() {
-  //   $('#comments').keyup(function() {
-  //     if (commentInput.value.length != 0) {
-  //       $('.comment-button').prop('disabled', false);
-  //       $('.comment-button').removeClass('tweet-danger');
-  //       $('.comment-button').css('cursor', 'pointer');
-  //     } else {
-  //       $('.comment-button').prop('disabled', true);
-  //       $('.comment-button').addClass('tweet-danger'); 
-  //       $('.comment-button').css('cursor', 'not-allowed');
-  //     }
-  //   });
-  // });
+  var comment = document.getElementById('comments');
+  $(function() {
+    $('.tweet-comment').keyup(function() {
+      if (comment.value.length != 0) {
+        $('.comment-button').css('cursor', 'pointer');
+      } else {
+        $('.comment-button').css('cursor', 'default');
+      }
+    });
+  });
 });
 
 function remove(_this) {
     $(_this).parents('.tweet').remove();
+}
+
+function isEmpty() {
+  var comment = document.getElementById('comments').value;
+  if (comment == "") return false;  
+  return true;
 }

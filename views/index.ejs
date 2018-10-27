@@ -34,32 +34,46 @@
                     </li>
               </nav>
               <form class="form-inline my-2 my-lg-0 tweet-form" action="/tweet/status"  onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="POST">
-                <!-- <div class="tweet-box"> -->
-                  <textarea class="tweet-input" type="text" id="status" name="status" placeholder="What's happening?" autocomplete="off"></textarea>
-                <!-- </div> -->
+                <textarea class="tweet-input" type="text" id="status" name="status" placeholder="What's happening?" autocomplete="off"></textarea>
                 <button class="tweet-button tweet-danger" disabled>Tweet</button>
-                </form>
+              </form>
 
                 <% if (typeof tweets != "undefined") { %>
                   <% tweets.reverse().forEach( (tweet) => { %>
                     <div class="tweet">
                       <img class="user-pic" src="/imgs/user.png">
                       <a class="tweet-date"> • <%= tweet.date %></a>
-                      <a class="username" href="#">@<%= tweet.username %></a>
-                      <form action='/tweet/<%= tweet.id %>?_method=DELETE' method='POST'>
+                      <a class="username" href="#"><%= tweet.username %></a>
+                      <% if (username == tweet.username) {%>
+                      <form action='/tweet/<%= tweet.id %>/status?_method=DELETE' method='POST'>
                         <button class="btn btn-outline-danger remove-button" type="submit">remove</button>
                       </form>
+                      <% } %>
                       <div class="tweet-context">
                         <a class="tweet-body"><%= tweet.body %></a>
                       </div>
+
+
                       <hr>
+
+
+                      <% tweet.comments.forEach( (comment) => { %>
+                        <div class="comment-container">
+                        <img class="comment-pic" src="/imgs/user.png">
+                        <a class="tweet-date"> • <%= comment.date %></a>
+                        <a class="comment-username" href="#"><%= comment.username %></a>
+                        <a class="comment-body"><%= comment.body %></a>
+                        </div>
+                      <% }) %> 
                       <form action="/tweet/<%= tweet.id %>/comments" method="POST">
-                        <textarea class="tweet-comment" id="comments" type="text" placeholder="Enter a comment"></textarea>
+                        <textarea class="tweet-comment" id="comments" name="comments" type="text" placeholder="Enter a comment"></textarea>
+                        <button class="comment-button" onclick="return isEmpty()">Reply</button>
                       </form>
-                      <button class="comment-button tweet-danger" disabled>Reply</button>
                   </div>
                   <% }); %>
                 <% } %>
+
+                
                 <footer>
                   <a>Twitter is a registered trademark of Twitter Inc. This project is just for educational purpose only.</a>
                 </footer>
