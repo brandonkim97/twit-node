@@ -3,6 +3,7 @@ var router = express.Router();
 var index = require('./index');
 var Tweet = require('../models/tweets');
 var Comment = require('../models/comments');
+var User = require('../models/user');
 
 router.get('tweet', (req, res) => {
     res.render('tweet');
@@ -32,17 +33,36 @@ router.post('/status', index.authenticate, (req, res) => {
             if (err) throw err;
             //console.log(username + ' has posted a tweet');
         });
+        User.findByIdAndUpdate(
+            { _id: req.user.id },
+            {$push: {tweets: newTweet._id}},
+            {safe: true, upsert: true, new : true},
+            (err, model) => {
+                if (err) throw err;
+            }
+        );
         res.end();
 });
 
+//Delete a status
 router.delete('/:id/status', (req, res) => {
-    var id = req.params.id;
-    Tweet.findByIdAndDelete(id, (err, deletedTweet) => {
-        if (err) throw err;
-        res.redirect('/');
+    var tweetID = req.params.id;
+    console.log('tweet id: ' + tweetID);
+    console.log('user id: ' + req.user._id)
+    // Tweet.findByIdAndDelete(tweetID, (err, deletedTweet) => {
+    //     if (err) throw err;
+    // });
+    User.update(
+        { _id : req.user._id },
+        { $pull: { tweets: { $in: tweetID} } }, 
+        {safe: true, upsert: true, new : true}, 
+        (err, obj) => {
+            res.redirect('/')
     });
+    
 });
 
+// Post a comment
 router.post('/:id/comments', (req, res) => {
     var comment = req.body.comments;
     var date = new Date();
@@ -60,7 +80,6 @@ router.post('/:id/comments', (req, res) => {
         date: date,
         likes: []
     };
-
     var newComment = new Comment(commentData);
     newComment.save( (err) => {
         if (err) throw err;
@@ -73,7 +92,6 @@ router.post('/:id/comments', (req, res) => {
         (err, model) => {
             if (err) throw err;
         });
-
     res.redirect('/');
 });
 module.exports = router;

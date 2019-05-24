@@ -1,7 +1,6 @@
 html, body {
-    position: relative;
     height: 100%;
-    margin: 0;
+    margin: 0 auto;
 }
 
 h1 {
@@ -14,6 +13,10 @@ hr {
     background-color: rgb(73, 113, 141);
 }
 
+h1, h2, h3, h4, p, label, button, li, footer, a {
+    font-family: 'Montserrat', sans-serif;
+}
+
 /* index file */
 footer {
     right: 0;
@@ -21,13 +24,23 @@ footer {
     bottom: 0;
     width: 100%;
     height: 100px;
-    background-color: #141D26;
+    background-color: rgb(27, 40, 54);
     transform: translateY(100%);
 }
 
 footer a {
     color: white;
     right: 50%;
+}
+
+.nav-active {
+    border-bottom-color: rgb(0, 174, 255);
+    border-bottom-style: solid;
+    color: rgb(0, 174, 255);
+}
+
+.navbar {
+    position: relative;
 }
 
 #right-body {
@@ -70,7 +83,7 @@ footer a {
 .full-background {
     min-height: 100%;
     min-width: 100%;
-    background-color: rgb(27, 40, 54);
+    background-color: #10171e;
     position: fixed;
     z-index: -1;
 }
@@ -119,8 +132,8 @@ footer a {
   
 /* Handle tweets */
 .tweet {
-    margin: 0 auto;
     width: 575px;
+    margin: 0 auto;
     min-height: 125px;
     min-width: 500px;
     background-color: #15202b;
@@ -150,10 +163,16 @@ footer a {
     float: left;
 }
 
+.user-pic:hover {
+    cursor: pointer;
+}
+
 .tweet-form {
     width: 575px;
     min-height: 150px;
     min-width: 500px;
+    text-align: center;
+    display: inline-block;
     margin: 20px auto;
     background-color: #1B3448;
     border: 1px solid #38444d;
@@ -172,11 +191,6 @@ footer a {
     border-color: transparent;
     border-radius: 100px;
     left: 84%;
-}
-
-.tweet-button:focus, .comment-button:focus, .tweet-input:focus {
-    outline: 0;
-    box-shadow: none!important;
 }
 
 .tweet-danger {
@@ -263,6 +277,10 @@ footer a {
     margin: 5px 0px 0px 5px;
 }
 
+.comment-pic:hover {
+    cursor: pointer;
+}
+
 .comment-username {
     position: relative;
     z-index: 5;
@@ -282,4 +300,150 @@ footer a {
     color: white;
     display: block;
     margin: 5px 0px 0px 10px;
+}
+
+.tweet-button:focus, .comment-button:focus, .tweet-input:focus {
+    outline: 0;
+    box-shadow: none!important;
+    border-color: rgb(0, 132, 255);
+    transition: border-color 0.5s ease;
+}
+
+/* User Box */
+.col-wrapper {
+    margin: 0 auto;
+    width: 550px;
+}
+
+.tweet-wrapper {
+    float: left;
+}
+
+#user-sidebar {
+    border: 1px solid #38444d;
+    background-color: #15202b;
+    float: left;
+    height: 220px;
+    width: 275px;
+    margin-left: -285px;
+}
+
+#user-banner {
+    background-color: rgb(64, 147, 255);
+    height: 40%;
+}
+
+#user-banner:hover {
+    cursor: pointer;
+}   
+
+#user-sidebar-info {
+    padding-left: 5px;
+    height: 30%;
+}
+
+.bio-username:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.col-item {
+    position: relative;
+    width: 33%;
+    text-align: center;
+    font-weight: bold;
+    float: left;
+    color: rgb(185, 185, 185);
+}
+
+.stats-title {
+    color: rgb(82, 151, 255);
+    position: relative;
+    width: 33%;
+    text-align: center;
+    float: left;
+    font-size: 20px;
+}
+
+/* User Profile */
+.profile-banner {
+    height: 20%;
+    background-color: rgb(0, 174, 255);
+    margin-top: -20px;
+}
+
+.profile-nav {
+    background-color: rgb(27, 40, 54);
+    height: 7%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#profile-sidebar {
+    float: left;
+    height: 220px;
+    width: 275px;
+    margin-left: -285px;
+}
+
+.profile-pic {
+    height: 200px;
+    width: 200px;
+    margin-top: -200px;
+    margin-left: -300px;
+    border-radius: 50%;
+    border: 4px solid rgb(27, 40, 54);
+}
+
+.navbar-full {
+    margin-left: -250px;
+}
+
+.nav-item {
+    margin-top: 10px;
+    color: rgb(172, 172, 172);
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.nav-item p {
+    color: rgb(102, 186, 255);
+    font-size: 18px;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.no-user-tweets {
+    margin-left: 80px; 
+    font-size:16px; 
+    font-weight: bold; 
+    color: rgb(180, 180, 180)
+}
+
+.delete-following {
+    color: white;
+    background-color: rgb(54, 101, 133);
+    padding: 10px;
+    font-weight: bold;
+    width: 110px;
+    border: none;
+    border-radius: 20px;
+    opacity: 0.9;
+    margin-top: -100px;
+    margin-right: -700px;
+}
+
+.delete-following:hover {
+    transition: 0.5s ease;
+    background-color: rgb(82, 149, 194);
+    opacity: 1;
+    cursor: pointer;
+}
+
+.delete-following:focus {
+    outline: none;
 }

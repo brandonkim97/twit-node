@@ -36,7 +36,11 @@ router.post('/register', function (req, res) {
             username: username,
             password: password,
             image: String,
-            bio: String
+            bio: String,
+            tweets: [],
+            following: [],
+            followers: [],
+            likes: []
         });
 
         User.createUser(newUser, (err, user) => {
@@ -48,7 +52,27 @@ router.post('/register', function (req, res) {
         res.locals.message = req.flash();
         res.redirect('/users/login');
     }
+});
+
+//Follow user
+router.post('/add', (req, res) => {
     
+});
+
+//Following list
+router.post('/following', (req, res) => {
+    console.log('following')
+    res.end();
+});
+
+// Unfollow user
+router.delete('/delete', (req,res) => {
+    console.log(req.params.id);
+    // var userToDelete = User.getUserById()
+    // User.findByIdAndUpdate(
+    //     { _id: req.params.id },
+    //     { $pull: }
+    // );
 });
 
 passport.use(new LocalStrategy((username, password, done) => {
@@ -106,4 +130,5 @@ router.get('/logout', (req, res) => {
     req.flash('success_msg', 'You have successfully logged out');
     res.redirect('/');
 });
+
 module.exports = router;

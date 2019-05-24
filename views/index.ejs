@@ -1,49 +1,57 @@
 <!DOCTYPE html>
+<!--index.ejs-->
 <html>
     <head>
-      <link rel="stylesheet" type="text/css" href="/css/style.css">
-      <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-      <script
-      src="https://code.jquery.com/jquery-3.3.1.js"
-      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-      crossorigin="anonymous"></script>  
-      <script type="text/javascript" src="/js/homeHandler.js"></script>    
+      <% include ./partials/head %>   
     </head>
-    <title>Twit-Node</title>
     <body>
         <div class="full-background"></div>
-        <nav class="navbar navbar-expand-lg navbar-dark dashboard-bg">
-                <a class="navbar-brand" href="/">Twit-Node</a>
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="./notifications">Notifications</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link" href="#">Messages</a>
-                    </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                  </form>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/users/logout">Logout</a>
-                    </li>
-              </nav>
+
+        <% include ./partials/body %>
+
+        <div class='col-wrapper'>
+          <div id='user-sidebar'>
+            <div id='user-banner' onclick="location.href = '/user/<%= username %>'">
+
+            </div>
+            <div id='user-sidebar-info'>
+              <img class="user-pic" style='margin-top: -30px; height: 70px; width: 70px; border: 3px solid #10171e' 
+                onclick="location.href = '/user/<%= username %>'" src="/imgs/img.jpg">
+              <a class='username bio-username' style='font-size: 20px; color: white;' onclick="location.href = '/user/<%= username %>'">@<%= username %></a>
+            </div>
+            <div id='user-bottom-column'>
+              <div class='col-item'>
+                <a class='col-title'>Tweets</a>
+              </div>
+              <div class='col-item'>
+                <a class='col-title'>Following</a>
+              </div>
+              <div class='col-item'>
+                <a class='col-title'>Followers</a>
+              </div>
+              <div class='col-stats'>
+                <a class='stats-title'><%= user.tweets.length %></a>
+              </div>
+              <div class='col-stats'>
+                  <a class='stats-title'><%= user.following.length %></a>
+              </div>
+              <div class='col-stats'>
+                  <a class='stats-title'><%= user.followers.length %></a>
+              </div>
+            </div>
+          </div>
+            <div class='tweet-wrapper'></div>
               <form class="form-inline my-2 my-lg-0 tweet-form" action="/tweet/status"  onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="POST">
                 <textarea class="tweet-input" type="text" id="status" name="status" placeholder="What's happening?" autocomplete="off"></textarea>
                 <button class="tweet-button tweet-danger" disabled>Tweet</button>
               </form>
-
                 <% if (typeof tweets != "undefined") { %>
+                  <% var i = 0; %>
                   <% tweets.reverse().forEach( (tweet) => { %>
-                    <div class="tweet">
-                      <img class="user-pic" src="/imgs/user.png">
+                    <div class="tweet" id="tweet<%=i++%>">
+                      <img class="user-pic" src="/imgs/img.jpg" onclick="location.href = '/user/<%= tweet.username %>'">
                       <a class="tweet-date"> • <%= tweet.date %></a>
-                      <a class="username" href="#"><%= tweet.username %></a>
+                      <a class="username" href="/user/<%=tweet.username%>"><%= tweet.username %></a>
                       <% if (username == tweet.username) {%>
                       <form action='/tweet/<%= tweet.id %>/status?_method=DELETE' method='POST'>
                         <button class="btn btn-outline-danger remove-button" type="submit">remove</button>
@@ -55,27 +63,23 @@
 
 
                       <hr>
-
-
                       <% tweet.comments.forEach( (comment) => { %>
                         <div class="comment-container">
-                        <img class="comment-pic" src="/imgs/user.png">
+                        <img class="comment-pic" src="/imgs/user.png" onclick="location.href = '/user/<%= comment.username %>'">
                         <a class="tweet-date"> • <%= comment.date %></a>
-                        <a class="comment-username" href="#"><%= comment.username %></a>
+                        <a class="comment-username" href = '/user/<%= comment.username %>'><%= comment.username %></a>
                         <a class="comment-body"><%= comment.body %></a>
                         </div>
                       <% }) %> 
+                      <% var k = 0; %>
                       <form action="/tweet/<%= tweet.id %>/comments" method="POST">
-                        <textarea class="tweet-comment" id="comments" name="comments" type="text" placeholder="Enter a comment"></textarea>
+                        <textarea class="tweet-comment" id="comments<%=k++%>" name="comments" type="text" placeholder="Enter a comment"></textarea>
                         <button class="comment-button" onclick="return isEmpty()">Reply</button>
                       </form>
                   </div>
                   <% }); %>
                 <% } %>
-
-                
-                <footer>
-                  <a>Twitter is a registered trademark of Twitter Inc. This project is just for educational purpose only.</a>
-                </footer>
+            </div>
+          <% include ./partials/footer %>
     </body>
 </html>

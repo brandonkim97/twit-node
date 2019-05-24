@@ -11,6 +11,8 @@ var expressValidator = require('express-validator');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var tweet = require('./routes/tweet');
+const URI = require('./keys/mongo');
+const mongoose = require('mongoose');
 
 var app = express();
 
@@ -66,7 +68,7 @@ app.use( (req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-    res.locals.user = req.user || null;
+    res.locals.currUser = req.user || null;
     res.locals.tweet = req.tweet || null;
     next();
 });
@@ -75,6 +77,13 @@ app.use( (req, res, next) => {
 app.use('/', index.router);
 app.use('/users', users);
 app.use('/tweet', tweet);
+
+//Connect to DB
+mongoose.connect(URI,
+    {useNewUrlParser: true}, (err) => {
+        if (err) throw err;
+        console.log("The Mongoose connection is ready.");
+});
 
 //Start server
 app.set('port', (process.env.PORT || 3000));

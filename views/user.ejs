@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--user.ejs-->
+<html>
+    <head>
+      <% include ./partials/head %> 
+      <!-- <script type="text/javascript" src='/js/userAJAX.js'></script>     -->
+    </head>
+    <body>
+      <% include ./partials/body %>
+      <div class='profile-banner'>
+      </div>
+      <div class='profile-nav'>
+        <ul class='navbar-full'>
+          <li class='nav-item' onclick="location.href='/user/<%= username %>'">Tweets <br> <p><%= tweets.length %></p></li>
+          <li class='nav-item' onclick="location.href='/user/following'">Following <br> <p><%= user.following.length %></p></li>
+          <li class='nav-item'>Followers <br> <p><%= user.followers.length %></p></li>
+          <li class='nav-item'>Likes <br> <p><%= user.likes.length %></p> </li>
+          <% if (currUser !== user) { %>
+            <li class='nav-item'>
+            <% if (!currUser.following.includes(user)) { %>
+              
+            <% } else {%>
+              <form action='/user/delete' method="POST">
+                <button type='submit' class='delete-following'>Follow</button>
+              </form>
+            <% } %>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+      <div class='bio'></div>
+      <div class='user-container'></div>
+      <div class='col-wrapper'>
+          <img class="profile-pic" src="/imgs/img.jpg" onclick="location.href = '/user/<%= username %>'">
+          <div id='profile-sidebar' style="margin-top: 50px;">
+            <div id='user-sidebar-info'>
+              <a class='username bio-username' style='font-size: 25px; color: white;' onclick="location.href = '/user/<%= username %>'">@<%= username %></a>
+            </div>
+          </div>
+            <div class='tweet-wrapper'></div>
+                <% if (typeof tweets != "undefined" && tweets.length !== 0) { %>
+                  <% let i = 0; %>
+                  <% tweets.reverse().forEach( (tweet) => { %>
+                    <% if (username == tweet.username) { %>
+                    <div class="tweet" id="tweet<%=i++%>">
+                      <img class="user-pic" src="/imgs/user.png" onclick="location.href = '/user/<%= tweet.username %>'">
+                      <a class="tweet-date"> • <%= tweet.date %></a>
+                      <a class="username" href="/user/<%=tweet.username%>"><%= tweet.username %></a>
+                        <div class="tweet-context">
+                          <a class="tweet-body"><%= tweet.body %></a>
+                        </div>
+                        <hr>
+                        <% tweet.comments.forEach( (comment) => { %>
+                          <div class="comment-container">
+                          <img class="comment-pic" src="/imgs/user.png" onclick="location.href = '/user/<%= comment.username %>'">
+                          <a class="tweet-date"> • <%= comment.date %></a>
+                          <a class="comment-username" href="#"><%= comment.username %></a>
+                          <a class="comment-body"><%= comment.body %></a>
+                          </div>
+                        <% }) %> 
+                        <% var k = 0; %>
+                        <form action="/tweet/<%= tweet._id %>/comments" method="POST">
+                          <textarea class="tweet-comment" id="comments<%=k++%>" name="comments" type="text" placeholder="Enter a comment"></textarea>
+                          <button class="comment-button" onclick="return isEmpty()">Reply</button>
+                        </form>
+                    </div>
+                  <% } %>
+                <% }); %>
+                <% if (!i) { %>
+                  <a class='no-user-tweets'>Looks like there aren't any tweets...</a>
+                <% } %>
+              <% } %>
+            </div>
+
+    </body>
+    <% include ./partials/footer %>
+
+</html>
