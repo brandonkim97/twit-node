@@ -15,5 +15,3 @@ Twit-node is a Twitter clone created as a project to learn Node.js and MongoDB. 
 ## Authors
 
 * **aaerok** - [aaerok](https://github.com/aaerok)
-* **henrywuo** - [henrywuo](https://github.com/henrywuo)
-
